@@ -1,0 +1,11 @@
+import re
+
+pattern = r'(\d+)-(\d+)'
+
+text = 'Numbers 1-10 are important.'
+
+matches = re.findall(pattern, text)
+
+result = [{'start': match[0], 'end': match[1]} for match in matches]
+
+print(result)
