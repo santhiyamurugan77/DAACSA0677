@@ -1,0 +1,15 @@
+def reverse(x: int) -> int:
+    reversed_num = 0
+    sign = 1 if x >= 0 else -1
+    x = abs(x)
+    while x != 0:
+        digit = x % 10
+        reversed_num = reversed_num * 10 + digit
+        x //= 10
+    reversed_num *= sign
+    return reversed_num if -2*31 <= reversed_num < 2*31 else 0
+
+# Example usage:
+print(reverse(123))  # Output: 321
+print(reverse(-123))  # Output: -321
+print(reverse(120))  # Output: 21
