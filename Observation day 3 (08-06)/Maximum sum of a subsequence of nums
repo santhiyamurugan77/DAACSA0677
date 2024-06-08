@@ -1,0 +1,19 @@
+def maxSumRangeQuery(nums, queries):
+    MOD = 10**9 + 7
+    n = len(nums)
+    res = 0
+    dp = [[0]*(n+1) for _ in range(2)]
+    
+    for posi, xi in queries:
+        nums[posi] = xi
+    
+    dp[0][0] = dp[1][0] = 0
+    dp[0][1] = dp[1][1] = nums[0]
+    
+    for i in range(2, n+1):
+        dp[0][i] = max(dp[0][i-1], dp[1][i-2] + nums[i-1])
+        dp[1][i] = max(dp[1][i-1], dp[0][i-2] + nums[i-1])
+    
+    res = dp[0][n]
+    
+    return res % MOD
