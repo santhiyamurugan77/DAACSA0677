@@ -1,0 +1,23 @@
+def replace_question_marks(s):
+    char_count = {}
+    res = []
+    total_cost = 0
+    
+    for c in s:
+        if c == '?':
+            min_cost = float('inf')
+            min_char = ''
+            for char, count in char_count.items():
+                cost = count
+                if cost < min_cost:
+                    min_cost = cost
+                    min_char = char
+            res.append(min_char)
+            char_count[min_char] += 1
+            total_cost += min_cost
+        else:
+            res.append(c)
+            char_count[c] = char_count.get(c, 0) + 1
+            total_cost += char_count[c] - 1
+    
+    return ''.join(res), total_cost
