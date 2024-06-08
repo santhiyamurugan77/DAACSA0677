@@ -1,0 +1,16 @@
+def threeSumClosest(nums, target):
+    nums.sort()
+    closest_sum = float('inf')
+    for i in range(len(nums) - 2):
+        l, r = i + 1, len(nums) - 1
+        while l < r:
+            s = nums[i] + nums[l] + nums[r]
+            if s == target:
+                return s
+            if abs(s - target) < abs(closest_sum - target):
+                closest_sum = s
+            if s < target:
+                l += 1
+            else:
+                r -= 1
+    return closest_sum
