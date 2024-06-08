@@ -1,0 +1,16 @@
+def check_if_string_breaks(s1, s2):
+    # Create a dictionary to store the maximum character at each index
+    max_s1 = {}
+    max_s2 = {}
+    
+    for i in range(len(s1)):
+        max_s1[i] = max(s1[i], max_s1.get(i, ''))
+        max_s2[i] = max(s2[i], max_s2.get(i, ''))
+    
+    # Check if s1 can break s2
+    can_break_s2 = all(max_s1[i] >= s2[i] for i in range(len(s1)))
+    
+    # Check if s2 can break s1
+    can_break_s1 = all(max_s2[i] >= s1[i] for i in range(len(s2)))
+    
+    return can_break_s1 or can_break_s2
