@@ -1,0 +1,8 @@
+def last_string_before_empty(s):
+    while True:
+        for c in 'abcdefghijklmnopqrstuvwxyz':
+            if c in s:
+                s = s.replace(c, '', 1)
+                break
+        else:
+            return s
