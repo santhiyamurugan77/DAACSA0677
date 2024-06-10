@@ -1,0 +1,37 @@
+from typing import List
+
+# Define a placeholder for BinaryMatrix (not implemented here)
+class BinaryMatrix:
+    def dimensions(self):
+        # Placeholder for method, dimensions() would return rows, cols
+        pass
+    
+    def get(self, row: int, col: int) -> int:
+        # Placeholder for method, get(row, col) would return 0 or 1
+        pass
+
+def leftMostColumnWithOne(binaryMatrix: BinaryMatrix) -> int:
+    rows, cols = binaryMatrix.dimensions()
+    current_row = 0
+    current_col = cols - 1
+    while current_row < rows and current_col >= 0:
+        if binaryMatrix.get(current_row, current_col) == 1:
+            current_col -= 1
+        else:
+            current_row += 1
+    return current_col + 1 if current_col != cols - 1 else -1
+if __name__ == "__main__":
+     class ExampleBinaryMatrix(BinaryMatrix):
+        def dimensions(self):
+            return 3, 3
+        
+        def get(self, row: int, col: int) -> int:
+            matrix = [
+                [0, 0, 0],
+                [0, 1, 1],
+                [0, 0, 1]
+            ]
+            return matrix[row][col]
+    binaryMatrix = ExampleBinaryMatrix()
+  result = leftMostColumnWithOne(binaryMatrix)
+    print(result)  # Output: 1
