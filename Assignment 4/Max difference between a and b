@@ -1,0 +1,27 @@
+To find the maximum difference between two integers obtained by applying the given operations to a given integer, you can try all possible pairs of digits x and y and calculate the resulting integers. Then, you can find the maximum difference between these two integers.
+
+Here's a Python function to implement this:
+
+```python
+def max_diff(num: int) -> int:
+    num_str = str(num)
+    max_diff = 0
+    
+    for i in range(10):
+        for j in range(10):
+            a = int(num_str.replace(str(i), str(j)))
+            if a != 0 and str(a)[0] != '0':
+                for k in range(10):
+                    for l in range(10):
+                        b = int(str(a).replace(str(k), str(l)))
+                        if b != 0 and str(b)[0] != '0':
+                            max_diff = max(max_diff, abs(a - b))
+    
+    return max_diff
+
+# Example usage:
+# num = 555
+# print(max_diff(num))  # Output: 888
+```
+
+This function returns the maximum difference between two integers obtained by applying the given operations to the input integer.
