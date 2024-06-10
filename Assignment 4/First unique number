@@ -1,0 +1,35 @@
+To implement the `FirstUnique` class, you can use a combination of a queue and a dictionary to keep track of the count of each integer in the queue.
+
+Here's a Python implementation:
+
+```python
+from collections import deque, defaultdict
+
+class FirstUnique:
+
+    def __init__(self, nums: List[int]):
+        self.queue = deque()
+        self.counter = defaultdict(int)
+        self.unique_set = set()
+        
+        for num in nums:
+            self.add(num)
+
+    def showFirstUnique(self) -> int:
+        while self.queue and self.counter[self.queue[0]] > 1:
+            self.queue.popleft()
+        
+        if self.queue:
+            return self.queue[0]
+        else:
+            return -1
+
+    def add(self, value: int) -> None:
+        self.counter[value] += 1
+        if self.counter[value] == 1:
+            self.queue.append(value)
+        elif value in self.unique_set:
+            self.unique_set.remove(value)
+```
+
+This implementation initializes the queue, a counter to keep track of the count of each integer, and a set to store unique integers. The `add` method updates the queue and the counter. The `showFirstUnique` method returns the first unique integer in the queue.
