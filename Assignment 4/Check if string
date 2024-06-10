@@ -1,0 +1,27 @@
+To solve this problem, you can sort both strings and then compare them character by character. If at any point s1[i] is greater than s2[i], it means that s1 cannot break s2. Similarly, if s2[i] is greater than s1[i], it means that s2 cannot break s1. If neither of these conditions is met for any character, then one string can break the other.
+
+Here's a Python function to implement this:
+
+```python
+def can_break(s1: str, s2: str) -> bool:
+    s1_sorted = sorted(s1)
+    s2_sorted = sorted(s2)
+    
+    s1_can_break_s2 = True
+    s2_can_break_s1 = True
+    
+    for i in range(len(s1)):
+        if s1_sorted[i] < s2_sorted[i]:
+            s1_can_break_s2 = False
+        elif s2_sorted[i] < s1_sorted[i]:
+            s2_can_break_s1 = False
+    
+    return s1_can_break_s2 or s2_can_break_s1
+
+# Example usage:
+# s1 = "abc"
+# s2 = "xya"
+# print(can_break(s1, s2))  # Output: True
+```
+
+This function returns True if one string can break the other, and False otherwise.
