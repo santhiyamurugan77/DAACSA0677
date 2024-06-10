@@ -1,0 +1,15 @@
+To solve this problem, you can iterate through the array and use a set to keep track of unique elements. For each element x, check if x + 1 is also in the set. If it is, increment the count. Finally, return the count. Here's a Python function to implement this:
+
+```python
+def count_elements(arr):
+    count = 0
+    unique_elements = set(arr)
+    
+    for x in arr:
+        if x + 1 in unique_elements:
+            count += 1
+    
+    return count
+```
+
+This function should work for the given examples and constraints.
