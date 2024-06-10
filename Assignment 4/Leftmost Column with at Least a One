@@ -1,0 +1,35 @@
+To find the leftmost column with at least one 1 in a row-sorted binary matrix, you can use a binary search approach.
+
+Here's a Python function to implement this:
+
+```python
+class BinaryMatrix:
+    def get(self, row: int, col: int) -> int:
+        # Implementation of the BinaryMatrix interface
+        pass
+    
+    def dimensions(self) -> List[int]:
+        # Implementation of the BinaryMatrix interface
+        pass
+
+def leftmost_column_with_one(binaryMatrix: 'BinaryMatrix') -> int:
+    rows, cols = binaryMatrix.dimensions()
+    leftmost_column = cols
+    
+    for row in range(rows):
+        left, right = 0, cols - 1
+        
+        while left < right:
+            mid = left + (right - left) // 2
+            if binaryMatrix.get(row, mid) == 1:
+                right = mid
+            else:
+                left = mid + 1
+        
+        if binaryMatrix.get(row, left) == 1:
+            leftmost_column = min(leftmost_column, left)
+    
+    return leftmost_column if leftmost_column < cols else -1
+```
+
+This function should return the index of the leftmost column with a 1 in it, or -1 if such an index does not exist. It uses a binary search approach to find the leftmost column with a 1 in each row, then updates the leftmost column index accordingly.
