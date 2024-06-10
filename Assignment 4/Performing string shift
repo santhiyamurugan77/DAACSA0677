@@ -1,0 +1,21 @@
+To solve this problem, you can simulate the shifts by keeping track of the total shift amount. Since the string length can be large, it's better to perform the shifts modulo the length of the string to avoid unnecessary rotations.
+
+Here's a Python function to implement this:
+
+```python
+def string_shift(s, shifts):
+    total_shift = 0
+    for direction, amount in shifts:
+        if direction == 0:  # Left shift
+            total_shift -= amount
+        else:  # Right shift
+            total_shift += amount
+    
+    # Perform shifts modulo the length of the string
+    total_shift %= len(s)
+    
+    # Shift the string accordingly
+    return s[-total_shift:] + s[:-total_shift]
+```
+
+This function should handle the given examples and constraints.
