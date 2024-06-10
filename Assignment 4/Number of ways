@@ -1,0 +1,38 @@
+To solve this problem, you can use dynamic programming with bitmasking. You can iterate through each person and each hat preference, and for each person, calculate the number of ways they can wear a hat.
+
+Here's a Python function to implement this:
+
+```python
+def number_of_ways_to_wear_hats(hats):
+    MOD = 10**9 + 7
+    n = len(hats)
+    
+    # Create a list to store the number of ways for each person to wear a hat
+    dp = [0] * (1 << n)
+    dp[0] = 1
+    
+    # Create a dictionary to store the hats preferred by each person
+    hat_pref = {}
+    for i, person_hats in enumerate(hats):
+        for hat in person_hats:
+            hat_pref[hat] = hat_pref.get(hat, []) + [i]
+    
+    for hat in range(1, 41):
+        # Create a new list to store the updated number of ways for each person to wear a hat
+        new_dp = dp[:]
+        for subset in range(1 << n):
+            for person in hat_pref.get(hat, []):
+                if subset & (1 << person):
+                    continue
+                new_dp[subset | (1 << person)] += dp[subset]
+                new_dp[subset | (1 << person)] %= MOD
+        dp = new_dp
+    
+    return dp[(1 << n) - 1]
+
+# Example usage:
+# hats = [[3, 4], [4, 5], [5]]
+# print(number_of_ways_to_wear_hats(hats))  # Output: 1
+```
+
+This function returns the number of ways that the n people can wear different hats to each other, modulo 10^9 + 7.
