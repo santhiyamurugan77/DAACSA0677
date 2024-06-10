@@ -1,0 +1,24 @@
+To find the destination city, you can create a dictionary to keep track of the outgoing cities from each city. Then, you can iterate through the paths and mark the cities that are outgoing. Finally, you return the city that is not marked as outgoing.
+
+Here's a Python function to implement this:
+
+```python
+def dest_city(paths):
+    outgoing_cities = set()
+    all_cities = set()
+    
+    for path in paths:
+        all_cities.add(path[0])
+        all_cities.add(path[1])
+        outgoing_cities.add(path[0])
+    
+    for city in all_cities:
+        if city not in outgoing_cities:
+            return city
+
+# Example usage:
+# paths = [["London", "New York"], ["New York", "Lima"], ["Lima", "Sao Paulo"]]
+# print(dest_city(paths))  # Output: "Sao Paulo"
+```
+
+This function returns the destination city, which is the city without any path outgoing to another city.
