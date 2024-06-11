@@ -1,0 +1,16 @@
+def getSum(num):
+    if num == 0:
+        return num
+    else:
+        return pow((num),order) + getSum(num//10)  
+
+num = int(input("Enter n-digit number : "))
+ 
+order = len(str(num))
+ 
+sum = getSum(num) 
+ 
+if sum==num:
+    print('It is an Armstrong number')
+else:
+    print('It is not an Armstrong number')
