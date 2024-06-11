@@ -1,0 +1,50 @@
+class ListNode:
+    def _init_(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def mergeTwoLists(list1, list2):
+    dummy = ListNode()
+    current = dummy
+    
+    while list1 and list2:
+        if list1.val < list2.val:
+            current.next = list1
+            list1 = list1.next
+        else:
+            current.next = list2
+            list2 = list2.next
+        current = current.next
+    
+    current.next = list1 if list1 else list2
+    return dummy.next
+
+# Helper function to create a linked list from a list of values
+def createLinkedList(values):
+    head = ListNode(values[0]) if values else None
+    current = head
+    for value in values[1:]:
+        current.next = ListNode(value)
+        current = current.next
+    return head
+
+# Helper function to print the linked list
+def printLinkedList(head):
+    while head:
+        print(head.val, end=" -> ")
+        head = head.next
+    print("None")
+
+# Example usage
+list1 = createLinkedList([1, 2, 4])
+list2 = createLinkedList([1, 3, 4])
+
+print("List 1:")
+printLinkedList(list1)
+
+print("List 2:")
+printLinkedList(list2)
+
+merged_list = mergeTwoLists(list1, list2)
+print("Merged List:")
+printLinkedList(merged_list
