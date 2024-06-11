@@ -1,0 +1,8 @@
+array = [10, 30, 50, 20, 40]
+
+max_element = array[0]
+for num in array:
+    if num > max_element:
+        max_element = num
+
+print("The largest element in the array is:", max_element)
