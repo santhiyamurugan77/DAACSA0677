@@ -1,0 +1,9 @@
+def atoi(s):
+    result = 0
+    for i in range(len(s)):
+        result = result * 10 + (ord(s[i]) - ord('0'))
+    return result
+
+# Test the function
+s = "12345"
+print(atoi(s))  # Output: 12345
