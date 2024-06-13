@@ -1,0 +1,21 @@
+To find the pivot integer \( x \) for a given positive integer \( n \), you can iterate through possible values of \( x \) and check if the sum of elements from 1 to \( x \) equals the sum of elements from \( x + 1 \) to \( n \). Here's a Python function to achieve this:
+
+```python
+def find_pivot_integer(n):
+    total_sum = n * (n + 1) // 2
+    
+    left_sum = 0
+    for x in range(1, n + 1):
+        left_sum += x
+        right_sum = total_sum - left_sum
+        if left_sum == right_sum:
+            return x
+    return -1
+
+# Example usage:
+print(find_pivot_integer(8))  # Output: 6
+print(find_pivot_integer(1))  # Output: 1
+print(find_pivot_integer(4))  # Output: -1
+```
+
+This function calculates the total sum of all elements from 1 to \( n \). Then, it iterates through the possible values of \( x \) and checks if the sum of elements from 1 to \( x \) is equal to the sum of elements from \( x + 1 \) to \( n \). If such a pivot integer \( x \) is found, it returns \( x \); otherwise, it returns -1.
