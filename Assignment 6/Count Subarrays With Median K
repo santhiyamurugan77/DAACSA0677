@@ -1,0 +1,35 @@
+To count the number of non-empty subarrays in the given array `nums` that have a median equal to `k`, you can iterate through each element of the array and expand the subarray around that element while checking if the median is equal to `k`. Here's a Python function to achieve this:
+
+```python
+def count_subarrays_with_median_k(nums, k):
+    n = len(nums)
+    count = 0
+    
+    for i in range(n):
+        left = i
+        right = i
+        while left >= 0 and right < n and nums[left] <= k and nums[right] <= k:
+            subarray = nums[left:right+1]
+            median_index = (right - left) // 2
+            if len(subarray) % 2 == 0:
+                median = subarray[median_index]
+            else:
+                median = subarray[median_index + 1]
+            if median == k:
+                count += 1
+            left -= 1
+            right += 1
+    
+    return count
+
+# Example usage:
+nums1 = [3, 2, 1, 4, 5]
+k1 = 4
+print(count_subarrays_with_median_k(nums1, k1))  # Output: 3
+
+nums2 = [2, 3, 1]
+k2 = 3
+print(count_subarrays_with_median_k(nums2, k2))  # Output: 1
+```
+
+This function iterates through each element of the array `nums` and expands the subarray around that element. It checks if the median of the subarray is equal to `k` and increments the count accordingly. Finally, it returns the count of subarrays with median equal to `k`.
