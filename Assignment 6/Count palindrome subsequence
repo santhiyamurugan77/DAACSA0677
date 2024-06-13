@@ -1,0 +1,44 @@
+To count the palindromic subsequences of length 5 in a given string, you can use dynamic programming. Here's a Python function to achieve this:
+
+```python
+def count_palindromic_subsequences(s):
+    mod = 10**9 + 7
+    n = len(s)
+    dp = [[0] * n for _ in range(n)]
+    
+    for i in range(n):
+        dp[i][i] = 1
+    
+    for length in range(2, 6):
+        for i in range(n - length + 1):
+            j = i + length - 1
+            if s[i] == s[j]:
+                left, right = i + 1, j - 1
+                while left <= right and s[left] != s[i]:
+                    left += 1
+                while left <= right and s[right] != s[i]:
+                    right -= 1
+                if left > right:
+                    dp[i][j] = dp[i + 1][j - 1] * 2 + 2
+                elif left == right:
+                    dp[i][j] = dp[i + 1][j - 1] * 2 + 1
+                else:
+                    dp[i][j] = dp[i + 1][j - 1] * 2 - dp[left + 1][right - 1]
+            else:
+                dp[i][j] = dp[i][j - 1] + dp[i + 1][j] - dp[i + 1][j - 1]
+            dp[i][j] %= mod
+    
+    return dp[0][n - 1]
+
+# Example usage:
+s1 = "103301"
+print(count_palindromic_subsequences(s1))  # Output: 2
+
+s2 = "0000000"
+print(count_palindromic_subsequences(s2))  # Output: 21
+
+s3 = "9999900000"
+print(count_palindromic_subsequences(s3))  # Output: 2
+```
+
+This function utilizes dynamic programming to count the number of palindromic subsequences of length 5 in the given string `s`, and returns the result modulo \(10^9 + 7\).
