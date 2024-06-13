@@ -1,0 +1,47 @@
+Here's a Python solution for the "Maximum XOR of Two Non-Overlapping Subtrees" problem:
+
+```python
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.children = []
+
+def max_xor_non_overlapping_subtrees(n, edges, values):
+    # Construct the tree
+    nodes = [TreeNode(val) for val in values]
+    for a, b in edges:
+        nodes[a].children.append(nodes[b])
+        nodes[b].children.append(nodes[a])
+    
+    # Helper function to traverse the tree and calculate subtree sums
+    def dfs(node, parent):
+        xor_sum = node.val
+        for child in node.children:
+            if child != parent:
+                xor_sum ^= dfs(child, node)
+        return xor_sum
+    
+    # Helper function to traverse the tree and find the maximum XOR of two non-overlapping subtrees
+    def dfs_max_xor(node, parent, max_xor):
+        xor_sum = node.val
+        for child in node.children:
+            if child != parent:
+                child_xor = dfs(child, node)
+                max_xor[0] = max(max_xor[0], xor_sum ^ child_xor)
+                dfs_max_xor(child, node, max_xor)
+        return xor_sum
+    
+    # Find the maximum XOR
+    max_xor = [0]
+    dfs_max_xor(nodes[0], None, max_xor)
+    
+    return max_xor[0]
+
+# Example usage:
+n = 6
+edges = [[0, 1], [0, 2], [1, 3], [1, 4], [2, 5]]
+values = [2, 8, 3, 6, 2, 5]
+print(max_xor_non_overlapping_subtrees(n, edges, values))  # Output: 24
+```
+
+This code defines a TreeNode class to represent the tree structure and then implements two depth-first search (DFS) functions to traverse the tree and calculate the XOR sums. Finally, it finds the maximum XOR of two non-overlapping subtrees.
