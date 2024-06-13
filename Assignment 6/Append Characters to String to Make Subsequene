@@ -1,0 +1,37 @@
+To determine the minimum number of characters needed to be appended to the end of string \( s \) so that string \( t \) becomes a subsequence of \( s \), you can iterate through the characters of \( t \) and check if each character exists in \( s \). If a character in \( t \) doesn't exist in \( s \), it needs to be appended to \( s \) to make \( t \) a subsequence.
+
+Here's a Python function to implement this:
+
+```python
+def min_chars_to_append(s, t):
+    s_pointer = 0
+    t_pointer = 0
+    min_chars = 0
+    
+    while t_pointer < len(t):
+        if s_pointer >= len(s):
+            min_chars += len(t) - t_pointer
+            break
+        
+        if s[s_pointer] == t[t_pointer]:
+            t_pointer += 1
+        
+        s_pointer += 1
+    
+    return min_chars
+
+# Example usage:
+s1 = "coaching"
+t1 = "coding"
+print(min_chars_to_append(s1, t1))  # Output: 4
+
+s2 = "abcde"
+t2 = "a"
+print(min_chars_to_append(s2, t2))  # Output: 0
+
+s3 = "z"
+t3 = "abcde"
+print(min_chars_to_append(s3, t3))  # Output: 5
+```
+
+This function iterates through the characters of both strings, \( s \) and \( t \), using two pointers. It counts the characters needed to be appended to \( s \) so that \( t \) becomes a subsequence of \( s \).
