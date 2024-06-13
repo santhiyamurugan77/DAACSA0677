@@ -1,0 +1,11 @@
+Here's the SQL query to find all pairs of elements that can form a bond:
+
+```sql
+SELECT m.symbol AS metal, n.symbol AS nonmetal
+FROM Elements m
+JOIN Elements n
+ON m.type = 'Metal' AND n.type = 'Nonmetal'
+WHERE m.electrons >= n.electrons;
+```
+
+This query selects pairs of elements where one is a metal (`type = 'Metal'`) and the other is a nonmetal (`type = 'Nonmetal'`). It also ensures that the number of electrons the metal can give is greater than or equal to the number of electrons the nonmetal needs.
