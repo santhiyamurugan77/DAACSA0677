@@ -1,0 +1,33 @@
+To find the earliest hour at which the shop must be closed to incur a minimum penalty, you can iterate over each hour and calculate the penalty for closing the shop at that hour. Then, return the hour with the minimum penalty.
+
+Here's a Python function to achieve this:
+
+```python
+def min_penalty_hour(customers):
+    n = len(customers)
+    min_penalty = float('inf')
+    min_hour = 0
+    
+    for hour in range(n + 1):
+        penalty = 0
+        for i, c in enumerate(customers):
+            if (c == 'N' and i < hour) or (c == 'Y' and i >= hour):
+                penalty += 1
+        if penalty < min_penalty:
+            min_penalty = penalty
+            min_hour = hour
+    
+    return min_hour
+
+# Example usage:
+customers1 = "YYNY"
+print(min_penalty_hour(customers1))  # Output: 2
+
+customers2 = "NNNNN"
+print(min_penalty_hour(customers2))  # Output: 0
+
+customers3 = "YYYY"
+print(min_penalty_hour(customers3))  # Output: 4
+```
+
+This function iterates over each hour and calculates the penalty for closing the shop at that hour. It then keeps track of the hour with the minimum penalty and returns it.
