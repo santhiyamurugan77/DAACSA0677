@@ -1,0 +1,43 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def insertionSortList(head):
+    # Create a dummy node to act as the sorted portion of the list
+    dummy = ListNode(0)
+    current = head
+
+    while current:
+        # At each iteration, current points to the element to be inserted
+        prev = dummy
+        next_node = current.next
+        
+        # Find the correct position in the sorted portion
+        while prev.next and prev.next.val < current.val:
+            prev = prev.next
+        
+        # Insert the current node into the sorted portion
+        current.next = prev.next
+        prev.next = current
+        
+        # Move to the next element in the original list
+        current = next_node
+
+    return dummy.next
+
+# Helper function to print the list (for testing purposes)
+def printList(node):
+    while node:
+        print(node.val, end=" -> ")
+        node = node.next
+    print("None")
+
+# Example usage
+head = ListNode(4, ListNode(2, ListNode(1, ListNode(3))))
+print("Original list:")
+printList(head)
+
+sorted_head = insertionSortList(head)
+print("Sorted list:")
+printList(sorted_head)
