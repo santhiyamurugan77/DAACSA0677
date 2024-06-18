@@ -1,0 +1,35 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def sortedArrayToBST(nums):
+    if not nums:
+        return None
+    
+    def convertListToBST(left, right):
+        if left > right:
+            return None
+        
+        mid = (left + right) // 2
+        node = TreeNode(nums[mid])
+        
+        node.left = convertListToBST(left, mid - 1)
+        node.right = convertListToBST(mid + 1, right)
+        
+        return node
+    
+    return convertListToBST(0, len(nums) - 1)
+
+# Helper function to print the BST (in-order traversal)
+def inorderTraversal(root):
+    if root:
+        inorderTraversal(root.left)
+        print(root.val, end=' ')
+        inorderTraversal(root.right)
+
+# Example usage
+nums = [1, 2, 3, 4, 5, 6, 7]
+root = sortedArrayToBST(nums)
+inorderTraversal(root)  # Output: 1 2 3 4 5 6 7
