@@ -1,0 +1,42 @@
+from heapq import heappush, heappop
+
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def mergeKLists(lists):
+    min_heap = []
+    
+    # Define a comparator for the heap elements
+    for index, node in enumerate(lists):
+        if node:
+            heappush(min_heap, (node.val, index, node))
+    
+    dummy = ListNode()  # Dummy node to start the merged list
+    current = dummy  # Pointer to build the new list
+    
+    while min_heap:
+        val, index, node = heappop(min_heap)
+        current.next = ListNode(val)
+        current = current.next
+        if node.next:
+            heappush(min_heap, (node.next.val, index, node.next))
+    
+    return dummy.next
+
+# Helper function to print the list (for testing purposes)
+def printList(node):
+    while node:
+        print(node.val, end=" -> ")
+        node = node.next
+    print("None")
+
+# Example usage
+list1 = ListNode(1, ListNode(4, ListNode(5)))
+list2 = ListNode(1, ListNode(3, ListNode(4)))
+list3 = ListNode(2, ListNode(6))
+
+lists = [list1, list2, list3]
+merged_head = mergeKLists(lists)
+printList(merged_head)
