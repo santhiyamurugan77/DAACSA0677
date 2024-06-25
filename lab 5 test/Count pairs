@@ -1,0 +1,33 @@
+def count_pairs(nums1, nums2, diff):
+    n = len(nums1)
+    count = 0
+    
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums1[i] - nums2[i] <= nums1[j] - nums2[j] + diff:
+                count += 1
+                
+    return count
+
+# Example usage:
+nums1 = [3, 2, 5]
+nums2 = [2, 2, 1]
+diff = 1
+result = count_pairs(nums1, nums2, diff)
+print(result)  # Output: 3def count_pairs(nums1, nums2, diff):
+    n = len(nums1)
+    count = 0
+    
+    for i in range(n):
+        for j in range(i + 1, n):
+            if nums1[i] - nums2[i] <= nums1[j] - nums2[j] + diff:
+                count += 1
+                
+    return count
+
+# Example usage:
+nums1 = [3, 2, 5]
+nums2 = [2, 2, 1]
+diff = 1
+result = count_pairs(nums1, nums2, diff)
+print(result)  # Output: 3
