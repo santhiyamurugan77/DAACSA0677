@@ -1,0 +1,5 @@
+# Initialize variables
+a = 10
+b = 5
+result = (a - b) if a > b else (b - a)
+print(result)
