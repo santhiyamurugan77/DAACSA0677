@@ -1,0 +1,13 @@
+def find_substring_words(words):
+    substrings = []
+    for i in range(len(words)):
+        for j in range(len(words)):
+            if i != j and words[i] in words[j]:
+                substrings.append(words[i])
+                break
+    return substrings
+
+# Example usage
+words = ["mass", "as", "hero", "superhero"]
+result = find_substring_words(words)
+print(result)  # Output: ["as", "hero"]
